@@ -16,7 +16,7 @@ def lambda_handler(event, context):
 
     response = requests.post(url, data = {'ajax': 'ajax'}, headers = headers)
     
-    soup = BeautifulSoup(response.text, features="html.parser")
+    soup = BeautifulSoup(response.text.replace('</br>',''), features="html.parser")
     trackingDict = {}
     for div in soup.find_all('div'):
         if div.get('class') != None and 'single' in div.get('class'):
